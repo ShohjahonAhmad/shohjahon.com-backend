@@ -3,7 +3,8 @@ import prisma from "../prisma.js";
 
 export const getProjects: RequestHandler= async (req, res, next) => {
     const projects = await prisma.project.findMany({
-        orderBy: {createdAt: 'desc'}
+        orderBy: {createdAt: 'desc'},
+        include: {tags: {select: {name: true}}}
     });
 
     res.status(200).json({projects})
