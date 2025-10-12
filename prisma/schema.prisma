@@ -11,10 +11,9 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
-  // directUrl = env("DIRECT_URL")
 }
 
-model Projects {
+model Project {
   id          Int      @id @default(autoincrement()) @map("projects_id")
   title       String   @unique
   description String
@@ -32,7 +31,7 @@ enum WebType {
 }
 
 model Tag {
-  id       Int        @id @default(autoincrement()) @map("tags_id")
-  name     String     @unique
-  Projects Projects[] @relation("ProjectTags")
+  id       Int       @id @default(autoincrement()) @map("tags_id")
+  name     String    @unique
+  projects Project[] @relation("ProjectTags")
 }
