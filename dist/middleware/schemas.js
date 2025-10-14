@@ -10,6 +10,8 @@ export const ProjectSchema = z.object({
     description: z.string(),
     tags: z.array(z.string()),
     category: z.enum(Object.values(WebType)),
+    gitHub: z.string(),
+    videoUrl: z.string(),
     imageUrl: z.string(),
     createdAt: z.coerce.date().optional(),
     updatedAt: z.coerce.date().optional()
@@ -19,5 +21,7 @@ export const CreateProject = ProjectSchema.pick({
     description: true,
     tags: true,
     category: true,
+    gitHub: true,
+    videoUrl: true,
     imageUrl: true,
 }).strict();

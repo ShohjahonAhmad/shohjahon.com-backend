@@ -19,6 +19,8 @@ model Project {
   description String
   tags        Tag[]    @relation("ProjectTags")
   category    WebType
+  gitHub      String
+  videoUrl    String
   imageUrl    String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
