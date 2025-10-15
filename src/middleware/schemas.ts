@@ -1,4 +1,6 @@
-import { WebType } from '@prisma/client';
+import { CareerType, WebType } from '@prisma/client';
+import { title } from 'process';
+import { start } from 'repl';
 import z from 'zod';
 
 
@@ -30,3 +32,36 @@ export const CreateProject = ProjectSchema.pick({
     imageUrl: true,
 }).strict()
 
+export const CareerSchema = z.object({
+    id: z.number().int().nonnegative().optional(),
+    title: z.string(),
+    description: z.string(),
+    organization: z.string(),
+    start_date: z.coerce.date(),
+    end_date: z.coerce.date().optional(),
+    type: z.enum(Object.values(CareerType) as [string, ...string[]]),
+    isCurrent: z.boolean().default(false).optional()
+}).refine(
+    (data) => {
+        if(!data.isCurrent){
+            return !!data.end_date;
+        }
+        return true
+    },
+    {
+        message: "end_date is required when isCurrent is false",
+        path: ["end_date"]
+    }
+)
+
+export const CreateCareer = CareerSchema.pick({
+    title: true,
+    description: true,
+    organization: true,
+    start_date: true,
+    end_date: true,
+    type: true,
+    isCurrent: true
+}).strict()
+
+export const UpdateCareer = CreateCareer.partial().strict()

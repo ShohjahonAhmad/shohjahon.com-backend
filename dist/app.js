@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import projectsRouter from "./routers/projects.js";
 import leetcodeRouter from "./routers/leetcode.js";
+import careerRouter from "./routers/career.js";
 import notFound from './middleware/notFound.js';
 import errorHandler from './middleware/errorHandler.js';
 import cors from 'cors';
@@ -16,6 +17,7 @@ app.get("/", (req, res, next) => {
 });
 app.use("/projects", projectsRouter);
 app.use("/leetcode", leetcodeRouter);
+app.use("/career", careerRouter);
 app.use(notFound);
 app.use(errorHandler);
 app.listen(port, () => {

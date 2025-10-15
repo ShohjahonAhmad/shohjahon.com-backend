@@ -26,6 +26,22 @@ model Project {
   updatedAt   DateTime @updatedAt
 }
 
+model Career {
+  id           Int        @id @default(autoincrement()) @map("career_id")
+  title        String     @unique
+  description  String
+  organization String
+  start_date   DateTime
+  end_date     DateTime?
+  type         CareerType
+  isCurrent    Boolean    @default(false)
+}
+
+enum CareerType {
+  PROFESSIONAL
+  ACADEMIC
+}
+
 enum WebType {
   FRONTEND
   BACKEND

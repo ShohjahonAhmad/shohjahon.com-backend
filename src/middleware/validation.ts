@@ -26,3 +26,5 @@ export const validateParamId: RequestHandler = (req, res, next) => {
 
 
 export const createProject = validateBody(schemas.CreateProject)
+export const createCareer = validateBody(schemas.CreateCareer)
+export const updateCareer = [validateParamId, validateBody(schemas.UpdateCareer)]

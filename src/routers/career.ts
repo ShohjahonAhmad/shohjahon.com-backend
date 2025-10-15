@@ -1,0 +1,13 @@
+import express from 'express';
+import * as careerController from '../controllers/career.js';
+import * as validation from '../middleware/validation.js'
+
+const router = express.Router();
+
+router.get("/", careerController.getCareers);
+router.post("/", validation.createCareer, careerController.createCareer);
+router.get("/:id", validation.validateParamId, careerController.getCareer);
+router.patch("/:id", validation.updateCareer, careerController.updateCareer);
+router.delete("/:id", validation.validateParamId, careerController.deleteCareer);
+
+export default router;
